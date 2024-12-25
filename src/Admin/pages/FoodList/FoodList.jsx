@@ -7,7 +7,8 @@ const FoodList = () => {
 
     const getFoods = async () => {
         const result = await axios.get("http://localhost:5000/food/food_list");
-        setFood(result.data);
+        console.log(result)
+        setFood(result.data.message);
     }
     
     const removeFoodItem=async(foodId)=>{
@@ -26,10 +27,9 @@ const FoodList = () => {
         getFoods();
     }, []);
 
-    if (!food) {
+    if(!food) {
         return <span className="loading loading-spinner loading-lg"></span>;
     }
-
     return (
         <div className=" h-full p-6 bg-white rounded-lg shadow-lg"><ToastContainer></ToastContainer>
                 <table className="" >
