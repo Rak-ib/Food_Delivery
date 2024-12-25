@@ -3,7 +3,6 @@ import ExploreMenu from "../../Components/ExploreMenu/ExploreMenu";
 import Header from "../../Components/Header/Header";
 import FoodDisplay from "../../Components/FoodDisplay/FoodDisplay";
 
-
 const Home = () => {
     const [category,SetCategory]=useState("All");
     return (

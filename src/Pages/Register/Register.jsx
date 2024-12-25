@@ -1,7 +1,33 @@
-import { Link } from "react-router-dom";
+import axios from "axios";
+import { Link, useNavigate } from "react-router-dom";
+import { toast, ToastContainer } from "react-toastify";
 
 
 const Register = () => {
+    const navigate=useNavigate();
+    const handleRegister=async(e)=>{
+        e.preventDefault();
+        const userName=e.target.userName.value;
+        const email=e.target.email.value;
+        const password=e.target.password.value;
+        const image="null"
+        const user={userName,email,password,image};
+        console.log(user);
+        try {
+            const result=await axios.post("http://localhost:5000/user/register",user);
+            if(result.data.success){
+                toast.success(result.data.message)
+                navigate('/');
+            }else{
+                console.log("hello");
+                console.log("hello",result.data.message);
+                toast.error(result.data.message)
+            }
+            
+        } catch (error) {
+            console.log(error);
+        }
+    }
     return (
         <div className=" text-neutral-900 antialiased selection:bg-cyan-300  selection:text-cyan-900">
             <div className="fixed  top-0 -z-10 w-full h-full">
@@ -13,26 +39,27 @@ const Register = () => {
             </div>
             <div className="container mx-auto  my-[20vh] ">
                 <div className="hero my-auto ">
+                    <ToastContainer></ToastContainer>
                     <div className="hero-content">
                         <div className="card bg-base-100 w-full max-w-sm shrink-0 shadow-2xl">
-                            <form className="card-body">
+                            <form className="card-body" onSubmit={handleRegister}>
                                 <div className="form-control">
                                     <label className="label ">
                                         <span className="label-text ">Email </span>
                                     </label>
-                                    <input type="email" placeholder="email" className="input input-bordered" required />
+                                    <input type="email" name="email" placeholder="email" className="input input-bordered" required />
                                 </div>
                                 <div className="form-control">
                                     <label className="label ">
                                         <span className="label-text ">Username</span>
                                     </label>
-                                    <input type="text" placeholder="username" className="input input-bordered" required />
+                                    <input type="text" name="userName" placeholder="username" className="input input-bordered" required />
                                 </div>
                                 <div className="form-control">
                                     <label className="label">
                                         <span className="label-text">Password</span>
                                     </label>
-                                    <input type="password" placeholder="password" className="input input-bordered" required />
+                                    <input type="password" name="password" placeholder="password" className="input input-bordered" required />
                                     
                                 </div>
                                 <div className="form-control mt-6">

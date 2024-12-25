@@ -6,8 +6,13 @@ import PlaceOrder from "../../Pages/PlaceOrder/PlaceOrder";
 import Login from "../../Pages/Login/Login";
 import Register from "../../Pages/Register/Register";
 import AdminHome from "../../Admin/pages/Admin_home/AdminHome";
-import Dashboard from "../../Admin/pages/Dashboard/Dashboard";
+// import Dashboard from "../../Admin/pages/Dashboard/Dashboard";
 import AddFood from "../../Admin/pages/AddFood/AddFood";
+import FoodList from "../../Admin/pages/FoodList/FoodList";
+import Dashboard from "../../Admin/pages/Dashboard/Dashboard";
+import Verify from "../../Pages/Verify/Verify";
+import UserOrder from "../../Pages/UserOrder/UserOrder";
+import OrderList from "../../Admin/pages/OrderList/OrderList";
 
 
 const route =createBrowserRouter([
@@ -26,16 +31,24 @@ const route =createBrowserRouter([
             {
                 path:"/placeOrder",
                 element:<PlaceOrder></PlaceOrder>
+            },
+            {
+                path:"/login",
+                element:<Login></Login>
+            },
+            {
+                path:"/register",
+                element:<Register></Register>
+            },
+            {
+                path:"/verify",
+                element:<Verify></Verify>
+            },
+            {
+                path:'/userOrder',
+                element:<UserOrder></UserOrder>
             }
         ]
-    },
-    {
-        path:"/login",
-        element:<Login></Login>
-    },
-    {
-        path:"/register",
-        element:<Register></Register>
     },
     {
         path:"/admin",
@@ -43,11 +56,19 @@ const route =createBrowserRouter([
         children:[
             {
                 path:"/admin",
-                element:<AddFood></AddFood>
+                element:<Dashboard ></Dashboard>
             },
             {
                 path:"/admin/add_food",
                 element:<AddFood></AddFood>
+            },
+            {
+                path:"/admin/food_list",
+                element:<FoodList></FoodList>
+            },
+            {
+                path:"/admin/order_list",
+                element:<OrderList></OrderList>
             }
         ]
     }

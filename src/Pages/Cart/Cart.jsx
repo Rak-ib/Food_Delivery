@@ -1,12 +1,23 @@
-import { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
 import { StoreContext } from "../../Components/Context/StoreContext";
 import { useNavigate } from "react-router-dom";
-
+import axios from "axios";
 
 const Cart = () => {
-    const navigate=useNavigate();
-    const { food_list, CartItems, RemoveFromCart,TotalCartPrice } = useContext(StoreContext);
-    console.log(CartItems);
+    const navigate = useNavigate();
+    const { foods, CartItems, RemoveFromCart, TotalCartPrice,loading } = useContext(StoreContext);
+    console.log("cartItems oooooooo",Object.keys(CartItems).length);
+    console.log("foods",foods);
+
+
+    if(loading){
+        return (
+            <div className="flex justify-center items-center min-h-screen">
+                <div className="loading loading-dots loading-lg"></div>
+            </div>
+        );
+    }
+
     return (
         <div className="flex flex-col gap-y-10">
             <div className="overflow-x-auto">
@@ -22,12 +33,14 @@ const Cart = () => {
                         </tr>
                     </thead>
                     <tbody>
-                        {/* row 1 */}
-                        {food_list.map((food, index) => {
+                        {/* <h2>hello</h2> */}
+                        {/* row 1 */ 
+                        }
+                        {foods.map((food, index) => {
                             if (CartItems[food._id] > 0) {
                                 return <tr key={index} className="hover:bg-orange-200  rounded-xl my-2">
                                     <td className="max-w-11"><img src={food.image} className="rounded-xl" alt="" /></td>
-                                    <td>{food.name}</td>
+                                    <td>{food.name}{foods.length}</td>
                                     <td>{food.price}</td>
                                     <td>{CartItems[food._id]} </td>
                                     <td><button onClick={() => (RemoveFromCart(food._id))} className="btn btn-active btn-ghost">X</button></td>
@@ -44,9 +57,9 @@ const Cart = () => {
                 <div className="flex flex-col gap-y-4">
                     <h2 className="text-3xl font-semibold text-center">Card Details</h2>
                     <div className="flex flex-wrap gap-x-5"><h2 className="w-36">Sub Total</h2><h2>{TotalCartPrice()}</h2></div>
-                    <div className="flex flex-wrap gap-x-5"><h2 className="w-36">Delivery Charge</h2><h2>{25}</h2></div>
-                    <div className="flex flex-wrap gap-x-5"><h2 className="w-36">Total Charge</h2><h2>{25+TotalCartPrice()}</h2></div>
-                    <button onClick={()=>navigate('/placeOrder')} className="btn btn-active">Proceed to Payment</button>
+                    <div className="flex flex-wrap gap-x-5"><h2 className="w-36">Delivery Charge</h2><h2>{TotalCartPrice()>0?5:0}</h2></div>
+                    <div className="flex flex-wrap gap-x-5"><h2 className="w-36">Total Charge</h2><h2>{TotalCartPrice()>0?5+TotalCartPrice():0}</h2></div>
+                    <button onClick={()=>navigate('/placeOrder')} className={TotalCartPrice()>0?"btn btn-active":"btn-disabled"}>Proceed to Payment</button>
                 </div>
                 <div>
                     <form action="" className="flex flex-row gap-x-1">

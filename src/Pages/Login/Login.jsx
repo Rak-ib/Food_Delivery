@@ -1,7 +1,29 @@
-import { Link } from "react-router-dom";
+// import axios from "axios";
+import { useContext } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
+import { StoreContext } from "../../Components/Context/StoreContext";
 
 
 const Login = () => {
+    const {SignIn}=useContext(StoreContext)
+    const navigate=useNavigate()
+    const handleLogin=async(e)=>{
+        e.preventDefault();
+        const name=e.target.name.value;
+        const password=e.target.password.value;
+        const user={name,password};
+        console.log(user);
+        const result=await SignIn(user);
+        console.log("ok");
+        if(result.data.success){
+            console.log(result.data.message);
+            toast.success(result.data.message);
+            navigate("/")
+        }
+        console.log(result.data.message);
+    }
+
     return (
         <div className=" text-neutral-900 antialiased selection:bg-cyan-300  selection:text-cyan-900">
             <div className="fixed  top-0 -z-10 w-full h-full">
@@ -15,18 +37,18 @@ const Login = () => {
                 <div className="hero my-auto ">
                     <div className="hero-content">
                         <div className="card bg-base-100 w-full max-w-sm shrink-0 shadow-2xl">
-                            <form className="card-body">
+                            <form className="card-body" onSubmit={handleLogin}>
                                 <div className="form-control">
                                     <label className="label ">
                                         <span className="label-text ">Email <span className="font-bold text-orange-500">/</span>Username</span>
                                     </label>
-                                    <input type="email" placeholder="email / username" className="input input-bordered" required />
+                                    <input type="text" name="name" placeholder="email / username" className="input input-bordered" required />
                                 </div>
                                 <div className="form-control">
                                     <label className="label">
                                         <span className="label-text">Password</span>
                                     </label>
-                                    <input type="password" placeholder="password" className="input input-bordered" required />
+                                    <input type="password" name="password" placeholder="password" className="input input-bordered" required />
                                     
                                 </div>
                                 <div className="form-control mt-6">
