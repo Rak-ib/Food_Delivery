@@ -14,12 +14,12 @@ const StoreContextProvider = ({ children }) => {
 
     // Load foods
     const getFoods = async () => {
-        const result = await axios.get("http://localhost:5000/food/food_list");
+        const result = await axios.get("https://server-food-delivery-new.vercel.app/food/food_list");
         setFood(result.data.message);
     };
 
     const SignIn=async(user)=>{
-        const result= await axios.post("http://localhost:5000/user/login",user,{withCredentials:true});
+        const result= await axios.post("https://server-food-delivery-new.vercel.app/user/login",user,{withCredentials:true});
         console.log("Singin:",result);
         setCurrentUser(result.data.user);
         return result;
@@ -27,7 +27,7 @@ const StoreContextProvider = ({ children }) => {
 
     const GoogleSignIn= async(token)=>{
         try {
-            const result= await axios.post("http://localhost:5000/user/googleLogin",{token},{withCredentials:true});        
+            const result= await axios.post("https://server-food-delivery-new.vercel.app/user/googleLogin",{token},{withCredentials:true});        
             if(result.data.success){
                 setCurrentUser(result.data.user);
             }   
@@ -41,7 +41,7 @@ const StoreContextProvider = ({ children }) => {
 
     const SignUp=async(user)=>{
         try {
-            const result=await axios.post("http://localhost:5000/user/register",user,{withCredentials:true})
+            const result=await axios.post("https://server-food-delivery-new.vercel.app/user/register",user,{withCredentials:true})
             console.log("singup",result.data.user);
             return result;
         } catch (error) {
@@ -52,7 +52,7 @@ const StoreContextProvider = ({ children }) => {
 
     const SignOut=async()=>{
         try {
-            const result=await axios.get('http://localhost:5000/user/logout',{withCredentials:true})
+            const result=await axios.get('https://server-food-delivery-new.vercel.app/user/logout',{withCredentials:true})
             if(result.data.success){
                 setCurrentUser(null);
                 
@@ -65,7 +65,7 @@ const StoreContextProvider = ({ children }) => {
 
     const AddToCart = async (foodId) => {
         try {
-            const result = await axios.post('http://localhost:5000/cart/add', { itemId: foodId }, { withCredentials: true });
+            const result = await axios.post('https://server-food-delivery-new.vercel.app/cart/add', { itemId: foodId }, { withCredentials: true });
             if(result.data.success){
                 if(!CartItems[foodId]){
                     SetCartItems((prev)=>({...prev,[foodId]:1}))
@@ -84,7 +84,7 @@ const StoreContextProvider = ({ children }) => {
 
     const RemoveFromCart = async (foodId) => {
         try {
-            const result = await axios.post('http://localhost:5000/cart/remove', { itemId: foodId }, { withCredentials: true });
+            const result = await axios.post('https://server-food-delivery-new.vercel.app/cart/remove', { itemId: foodId }, { withCredentials: true });
             if(result.data.success){
                 if(CartItems[foodId]>0){
                     SetCartItems((prev)=>({...prev,[foodId]:prev[foodId]-1}))
@@ -102,7 +102,7 @@ const StoreContextProvider = ({ children }) => {
 
     const getCartData=async()=>{
         try {
-            const result = await axios.get('http://localhost:5000/cart/get', { withCredentials: true }); 
+            const result = await axios.get('https://server-food-delivery-new.vercel.app/cart/get', { withCredentials: true }); 
             if(result.data.success){
                 SetCartItems(result.data.message);
             }else{
@@ -128,7 +128,7 @@ const StoreContextProvider = ({ children }) => {
 
     const getCurrentUser = async () => {
         try {
-            const result = await axios.get('http://localhost:5000/user/currentUser', { withCredentials: true });
+            const result = await axios.get('https://server-food-delivery-new.vercel.app/user/currentUser', { withCredentials: true });
             if (result.data.success) {
                 setCurrentUser(result.data.user);
             } else {

@@ -59,7 +59,7 @@ const AdminOrderManagement = () => {
     const fetchOrders = async () => {
         try {
             setLoading(true);
-            const result = await axios.get('http://localhost:5000/order/orderList', { withCredentials: true });
+            const result = await axios.get('https://server-food-delivery-new.vercel.app/order/orderList', { withCredentials: true });
             if (result.data.success) {
                 setOrders(result.data.orders);
                 setFilteredOrders(result.data.orders);
@@ -73,7 +73,7 @@ const AdminOrderManagement = () => {
 
     const updateOrderStatus = async (orderId, newStatus) => {
         try {
-            await axios.put(`http://localhost:5000/order/${orderId}/status`, {
+            await axios.put(`https://server-food-delivery-new.vercel.app/order/${orderId}/status`, {
                 status: newStatus
             }, { withCredentials: true });
 

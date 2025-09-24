@@ -39,7 +39,7 @@
 
 
 //         if(TotalCartPrice()>0){
-//             const result=await axios.post('http://localhost:5000/order/placeOrder',
+//             const result=await axios.post('https://server-food-delivery-new.vercel.app/order/placeOrder',
 //                 {address,items:orderItems,amount:TotalCartPrice()+5,paymentMethod: 'bkash'},
 //                 {withCredentials:true})
 //         // console.log();
@@ -152,7 +152,7 @@
                 
 //                 console.log("Placing order with amount:", totalAmount);
                 
-//                 const result = await axios.post('http://localhost:5000/order/placeOrder', {
+//                 const result = await axios.post('https://server-food-delivery-new.vercel.app/order/placeOrder', {
 //                     address,
 //                     items: orderItems,
 //                     amount: totalAmount, // Fixed: Use consistent delivery charge
@@ -345,7 +345,7 @@ const PlaceOrder = () => {
     //             console.log("Placing order with amount:", totalAmount);
                 
     //             // Step 1: Place the order
-    //             const placeOrderResult = await axios.post('http://localhost:5000/order/placeOrder', {
+    //             const placeOrderResult = await axios.post('https://server-food-delivery-new.vercel.app/order/placeOrder', {
     //                 address,
     //                 items: orderItems,
     //                 amount: totalAmount,
@@ -360,7 +360,7 @@ const PlaceOrder = () => {
     //                 // Step 2: Initiate SSLCommerz payment
     //                 const { orderId, orderData } = placeOrderResult.data;
                     
-    //                 const initiateResult = await axios.post('http://localhost:5000/order/sslcommerz/initiate', {
+    //                 const initiateResult = await axios.post('https://server-food-delivery-new.vercel.app/order/sslcommerz/initiate', {
     //                     orderId: orderData.orderId,
     //                     amount: orderData.amount,
     //                     address: orderData.address
@@ -428,7 +428,7 @@ const PlaceOrder = () => {
             const totalAmount = TotalCartPrice() + 25;
             
             // Single API call that handles both order creation and payment initiation
-            const result = await axios.post('http://localhost:5000/order/placeOrder', {
+            const result = await axios.post('https://server-food-delivery-new.vercel.app/order/placeOrder', {
                 address,
                 items: orderItems,
                 amount: totalAmount,

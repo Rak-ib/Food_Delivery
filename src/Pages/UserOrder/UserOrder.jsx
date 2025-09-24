@@ -12,7 +12,7 @@ const UserOrder = () => {
   const fetchOrders = async () => {
     try {
       setLoading(true);
-      const result = await axios.get('http://localhost:5000/order/userOrder', { withCredentials: true });
+      const result = await axios.get('https://server-food-delivery-new.vercel.app/order/userOrder', { withCredentials: true });
       console.log(result.data.order);
       if (result.data.success) {
         setOrders(result.data.orders);

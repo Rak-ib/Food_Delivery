@@ -64,7 +64,7 @@ const AdminAnalytics = () => {
     const fetchAnalytics = async () => {
         try {
             setLoading(true);
-            const response = await axios.get(`http://localhost:5000/order/analytics?range=${timeRange}`, {
+            const response = await axios.get(`https://server-food-delivery-new.vercel.app/order/analytics?range=${timeRange}`, {
                 withCredentials: true
             });
             

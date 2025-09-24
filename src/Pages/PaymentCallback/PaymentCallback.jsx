@@ -28,7 +28,7 @@ const PaymentCallback = () => {
 
                 if (status === 'success') {
                     // Execute the payment
-                    const result = await axios.post('http://localhost:5000/order/bkash/execute', {
+                    const result = await axios.post('https://server-food-delivery-new.vercel.app/order/bkash/execute', {
                         paymentID,
                         orderId
                     }, {

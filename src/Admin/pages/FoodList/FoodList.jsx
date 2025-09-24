@@ -6,13 +6,13 @@
 //     const [food, setFood] = useState([]);
 
 //     const getFoods = async () => {
-//         const result = await axios.get("http://localhost:5000/food/food_list");
+//         const result = await axios.get("https://server-food-delivery-new.vercel.app/food/food_list");
 //         console.log(result)
 //         setFood(result.data.message);
 //     }
     
 //     const removeFoodItem=async(foodId)=>{
-//         const result=await axios.delete(`http://localhost:5000/food/remove/${foodId}`)
+//         const result=await axios.delete(`https://server-food-delivery-new.vercel.app/food/remove/${foodId}`)
 //         // console.log(result.data);
 //         await getFoods();
 //         if(result.data.success){
@@ -81,7 +81,7 @@ const FoodList = () => {
 
     const getFoods = async () => {
         try {
-            const result = await axios.get("http://localhost:5000/food/food_list",{ withCredentials: true });
+            const result = await axios.get("https://server-food-delivery-new.vercel.app/food/food_list",{ withCredentials: true });
             setFood(result.data.message);
             setFilteredFood(result.data.message);
         } catch (error) {
@@ -91,7 +91,7 @@ const FoodList = () => {
 
     const removeFoodItem = async (foodId) => {
         try {
-            const result = await axios.delete(`http://localhost:5000/food/remove/${foodId}`,{ withCredentials: true });
+            const result = await axios.delete(`https://server-food-delivery-new.vercel.app/food/remove/${foodId}`,{ withCredentials: true });
             await getFoods();
             toast.success(result.data.message);
         } catch (error) {
@@ -103,7 +103,7 @@ const FoodList = () => {
         e.preventDefault();
         try {
             const result = await axios.put(
-                `http://localhost:5000/food/update/${editingFood._id}`,
+                `https://server-food-delivery-new.vercel.app/food/update/${editingFood._id}`,
                 editingFood
             );
             toast.success(result.data.message);

@@ -26,35 +26,15 @@ const AddFood = () => {
         const newFood={name,price,category,description,image}
         console.log(newFood);
         try {
-            const result= await axios.post('http://localhost:5000/food/add/',newFood)
+            const result= await axios.post('https://server-food-delivery-new.vercel.app/food/add/',newFood)
         console.log(result.data);
         if(result.data.success){
         toast.success(result.data.message);
         }else{
             toast.error(result.data.message)
         }
-        // console.log("image1",image);
-        //     if (foodImageResult && foodImageResult.data && foodImageResult.data.public_id) {
-        //         try {
-        //             await axios.post('https://api.cloudinary.com/v1_1/dcao1wljw/image/destroy', {
-        //                 public_id: foodImageResult.data.public_id
-        //             });
-        //         } catch (deleteError) {
-        //             console.error("Failed to delete image from Cloudinary", deleteError);
-        //         }
-        //     }
         } catch (error) {
             toast.error("Some thing went wrong")
-            console.log("image",image);
-            // if (foodImageResult && foodImageResult.data && foodImageResult.data.public_id) {
-            //     try {
-            //         await axios.post('https://api.cloudinary.com/v1_1/dcao1wljw/image/destroy', {
-            //             public_id: foodImageResult.data.public_id
-            //         });
-            //     } catch (deleteError) {
-            //         console.error("Failed to delete image from Cloudinary", deleteError);
-            //     }
-            // }
         }
 
     };
