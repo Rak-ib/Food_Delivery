@@ -20,15 +20,39 @@ const StoreContextProvider = ({ children }) => {
 
     const SignIn=async(user)=>{
         const result= await axios.post("http://localhost:5000/user/login",user,{withCredentials:true});
-        console.log("Singin:",result.data.user);
-        setCurrentUser(result.data.user.userName);
+        console.log("Singin:",result);
+        setCurrentUser(result.data.user);
         return result;
+    }
+
+    const GoogleSignIn= async(token)=>{
+        try {
+            const result= await axios.post("http://localhost:5000/user/googleLogin",{token},{withCredentials:true});        
+            if(result.data.success){
+                setCurrentUser(result.data.user);
+            }   
+            return result;
+        }
+        catch (error) {
+            console.log("Google SignIn Error",error)
+        }
+    }
+
+
+    const SignUp=async(user)=>{
+        try {
+            const result=await axios.post("http://localhost:5000/user/register",user,{withCredentials:true})
+            console.log("singup",result.data.user);
+            return result;
+        } catch (error) {
+            console.log("signUp Error",error)
+        }
     }
 
 
     const SignOut=async()=>{
         try {
-            const result=axios.get('http://localhost:5000/user/logout',{withCredentials:true})
+            const result=await axios.get('http://localhost:5000/user/logout',{withCredentials:true})
             if(result.data.success){
                 setCurrentUser(null);
                 
@@ -39,10 +63,7 @@ const StoreContextProvider = ({ children }) => {
 
     }
 
-
-
     const AddToCart = async (foodId) => {
-
         try {
             const result = await axios.post('http://localhost:5000/cart/add', { itemId: foodId }, { withCredentials: true });
             if(result.data.success){
@@ -144,6 +165,8 @@ const StoreContextProvider = ({ children }) => {
         TotalCartPrice,
         SignIn,
         SignOut,
+        SignUp,
+        GoogleSignIn,
         currentUser,
         Toast,setToast,
     };
