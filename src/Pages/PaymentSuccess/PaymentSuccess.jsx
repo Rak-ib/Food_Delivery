@@ -19,7 +19,7 @@ const PaymentSuccess = () => {
                 }
 
                 // Verify the order status
-                const result = await axios.post('http://localhost:5000/order/verify', {
+                const result = await axios.post('https://food-delivery-alpha-puce.vercel.app/order/verify', {
                     orderId
                 }, {
                     withCredentials: true
